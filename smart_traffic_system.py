@@ -75,17 +75,17 @@ while True:
                 cv2.line(frame, (25, DETECTION_LINE_POSITION), (1200, DETECTION_LINE_POSITION), (0, 127, 255), 3)
                 vehicle_centers.remove((cx, cy))
 
-                # speed = (w / 100) * 3.6
-                # timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                speed = (w / 100) * 3.6
+                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-                # with open(csv_file, mode='a', newline='') as file:
-                #     writer = csv.writer(file)
-                #     writer.writerow([vehicle_count, round(speed, 2), timestamp])
+                with open(csv_file, mode='a', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow([vehicle_count, round(speed, 2), timestamp])
 
-                # snapshot_name = f'snapshots/vehicle_{vehicle_count}_{timestamp.replace(":", "-")}.jpg'
-                # cv2.imwrite(snapshot_name, frame[y:y+h, x:x+w])
+                snapshot_name = f'snapshots/vehicle_{vehicle_count}_{timestamp.replace(":", "-")}.jpg'
+                cv2.imwrite(snapshot_name, frame[y:y+h, x:x+w])
 
-                # print(f"Vehicle {vehicle_count} detected. Speed: {round(speed, 2)} km/h at {timestamp}")
+                print(f"Vehicle {vehicle_count} detected. Speed: {round(speed, 2)} km/h at {timestamp}")
 
     cv2.putText(frame, f"VEHICLE COUNT: {vehicle_count}", (450, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 2)
     cv2.imshow("Original Video", frame)
@@ -96,4 +96,3 @@ while True:
 
 cv2.destroyAllWindows()
 video.release()
-
